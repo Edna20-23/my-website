@@ -92,18 +92,22 @@
   /**
    * Init typed.js
    */
-  const selectTyped = document.querySelector('.typed');
-  if (selectTyped) {
-    let typed_strings = selectTyped.getAttribute('data-typed-items');
-    typed_strings = typed_strings.split(',');
-    new Typed('.typed', {
-      strings: typed_strings,
-      loop: true,
-      typeSpeed: 100,
-      backSpeed: 50,
-      backDelay: 2000
-    });
-  }
+  window.addEventListener('load', function() {
+    const selectTyped = document.querySelector('.typed');
+    if (selectTyped && typeof Typed !== 'undefined') {
+      let typed_strings = selectTyped.getAttribute('data-typed-items');
+      typed_strings = typed_strings.split(',').map(s => s.trim());
+      new Typed('.typed', {
+        strings: typed_strings,
+        loop: true,
+        typeSpeed: 100,
+        backSpeed: 50,
+        backDelay: 2000,
+        showCursor: true,
+        cursorChar: '|'
+      });
+    }
+  });
 
   /**
    * Initiate Pure Counter
